@@ -18,7 +18,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-=^89ncj0bxhtqv-9=@c_mkv5kn(bo&r48x3#u2%g6ke$h@mw_5'
 DEBUG = True
-ALLOWED_HOSTS = ['*']
+import os
+
+# Динамічно формуємо ALLOWED_HOSTS для підтримки Codespaces і localhost
+codespace_name = os.environ.get('CODESPACE_NAME')
+allowed_hosts = ['localhost', '127.0.0.1']
+if codespace_name:
+    allowed_hosts.append(f'{codespace_name}-8000.app.github.dev')
+ALLOWED_HOSTS = allowed_hosts
 
 
 # Application definition
